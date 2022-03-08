@@ -1,0 +1,54 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>SALON SPA | LOGIN</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="header center">
+           LOGIN | MY SALON SPA
+        </div>
+
+        <div class="main">
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label id="email-label" for="email">Email</label>
+                    <input id="email" type="email" name="email" class="form-control" placeholder="Enter email" required>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-8">
+                    <label id="name-label" for="password">Password</label>
+                    <input id="password" type="password" name="password" class="form-control" placeholder="Enter Password" required>
+                </div>
+            </div>
+            <div class="wrap">
+                <button class="btn btn-primary">LOGIN</button>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <p>Forgot Password?</p>
+                </div>
+                <div class="col-md-4">
+                    <a href="#">Reset Password</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-8">
+                    <p>Do not have an account<span><a href="{% url 'signup'%}">Sign up</a></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
