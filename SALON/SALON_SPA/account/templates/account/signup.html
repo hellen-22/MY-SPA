@@ -19,64 +19,67 @@
         </div>
 
         <div class="main">
-            <!--First Name-->
-            <div class="row">
-                <div class="form-group col-md-8">
-                    <label id="firstname-label" for="first-name">First Name</label>
-                    <input id="first-name" type="text" name="name" class="form-control" placeholder="Enter First Name" required>
+            <form method="POST">
+                {% csrf_token %}
+                <!--First Name-->
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label id="firstname-label" for="first_name">First Name</label>
+                        <input id="first_name" type="text" name="name" class="form-control" placeholder="Enter First Name" required>
+                    </div>
                 </div>
-            </div>
 
-            <!--Second Name-->
-            <div class="row">
-                <div class="form-group col-md-8">
-                    <label id="lastname-label" for="last-name">Last Name</label>
-                    <input id="last-name" type="text" name="name" class="form-control" placeholder="Enter Last Name" required>
+                <!--Second Name-->
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label id="lastname-label" for="last-name">Last Name</label>
+                        <input id="last-name" type="text" name="name" class="form-control" placeholder="Enter Last Name" required>
+                    </div>
                 </div>
-            </div>
 
-            <!--User Name-->
-            <div class="row">
-                <div class="form-group col-md-8">
-                    <label id="username-label" for="user-name">UserName</label>
-                    <input id="user-name" type="text" name="name" class="form-control" placeholder="Enter UserName" required>
+                <!--User Name-->
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label id="username-label" for="user-name">UserName</label>
+                        <input id="user-name" type="text" name="name" class="form-control" placeholder="Enter UserName" required>
+                    </div>
                 </div>
-            </div>
 
-            <!--Email-->
-            <div class="row">
-                <div class="form-group col-md-8">
-                    <label id="email-label" for="email">Email</label>
-                    <input id="email" type="email" name="email" class="form-control" placeholder="Enter email" required>
+                <!--Email-->
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label id="email-label" for="email">Email</label>
+                        <input id="email" type="email" name="email" class="form-control" placeholder="Enter email" required>
+                    </div>
                 </div>
-            </div>
 
-            <!--Password-->
-            <div class="row">
-                <div class="form-group col-md-8">
-                    <label id="name-label" for="password">Password</label>
-                    <input id="password" type="password" name="password" class="form-control" placeholder="Enter Password" required>
+                <!--Password-->
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label id="name-label" for="password">Password</label>
+                        <input id="password" type="password" name="password" class="form-control" placeholder="Enter Password" required>
+                    </div>
                 </div>
-            </div>
 
-            <!--Confirm Password-->
-            <div class="row">
-                <div class="form-group col-md-8">
-                    <label id="name-label" for="password">Confirm Password</label>
-                    <input id="password" type="password" name="password" class="form-control" placeholder="Enter Confirm Password" required>
+                <!--Confirm Password-->
+                <div class="row">
+                    <div class="form-group col-md-8">
+                        <label id="name-label" for="password">Confirm Password</label>
+                        <input id="password" type="password" name="password" class="form-control" placeholder="Enter Confirm Password" required>
+                    </div>
                 </div>
-            </div>
-            <div class="wrap">
-                <button class="btn btn-primary">SIGNUP</button>
-            </div>
-            <div class="row">
-                <div class="col-md-4">
-                    <p>Already have an account?</p>
+                <div class="wrap">
+                    <button class="btn btn-primary">SIGNUP</button>
                 </div>
-                <div class="col-md-4">
-                    <a href="{% url 'login' %}">Login</a>
+                <div class="row">
+                    <div class="col-md-4">
+                        <p>Already have an account?</p>
+                    </div>
+                    <div class="col-md-4">
+                        <a href="{% url 'login' %}">Login</a>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 </body>
