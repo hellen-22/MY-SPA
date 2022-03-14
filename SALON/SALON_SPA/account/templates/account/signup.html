@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    {% include 'include/messages.html' %}
     <div class="container">
         <div class="header center">
            LOGIN | MY SALON SPA
@@ -24,7 +25,7 @@
                 <!--First Name-->
                 <div class="row">
                     <div class="form-group col-md-8">
-                        <label id="firstname-label" for="first_name">First Name</label>
+                        <label for="first_name">First Name</label>
                         <input id="first_name" type="text" name="name" class="form-control" placeholder="Enter First Name" required>
                     </div>
                 </div>
@@ -32,16 +33,16 @@
                 <!--Second Name-->
                 <div class="row">
                     <div class="form-group col-md-8">
-                        <label id="lastname-label" for="last-name">Last Name</label>
-                        <input id="last-name" type="text" name="name" class="form-control" placeholder="Enter Last Name" required>
+                        <label for="last_name">Last Name</label>
+                        <input id="last_name" type="text" name="name" class="form-control" placeholder="Enter Last Name" required>
                     </div>
                 </div>
 
                 <!--User Name-->
                 <div class="row">
                     <div class="form-group col-md-8">
-                        <label id="username-label" for="user-name">UserName</label>
-                        <input id="user-name" type="text" name="name" class="form-control" placeholder="Enter UserName" required>
+                        <label for="user-name">UserName</label>
+                        <input id="username" type="text" name="name" class="form-control" placeholder="Enter UserName" required>
                     </div>
                 </div>
 
@@ -64,8 +65,8 @@
                 <!--Confirm Password-->
                 <div class="row">
                     <div class="form-group col-md-8">
-                        <label id="name-label" for="password">Confirm Password</label>
-                        <input id="password" type="password" name="password" class="form-control" placeholder="Enter Confirm Password" required>
+                        <label for="password">Confirm Password</label>
+                        <input id="confirm_password" type="password" name="password" class="form-control" placeholder="Enter Confirm Password" required>
                     </div>
                 </div>
                 <div class="wrap">
