@@ -5,7 +5,7 @@ from .models import *
 
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
-    list_display = ('first_name', 'last_name', 'username', 'email', 'password', 'confirm_password')
+    list_display = ('first_name', 'last_name', 'username', 'email', 'password')
     search_fields = ('first_name', 'username')
     readonly_fields = ('date_joined', 'last_login')
     filter_horizontal = ()
@@ -23,4 +23,4 @@ class CustomUserAdmin(UserAdmin):
 
 
 
-admin.site.register(CustomUser)
+admin.site.register(CustomUser, CustomUserAdmin)
