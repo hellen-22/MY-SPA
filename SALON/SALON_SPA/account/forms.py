@@ -31,7 +31,7 @@ class CustomUserForm(UserCreationForm):
         {'placeholder': 'Confirm Password'}))
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ('first_name', 'last_name', 'username', 'email', 'password', 'confirm_password')
 
     def __init__(self, *args, **kwargs):
@@ -51,7 +51,7 @@ class PasswordChangingForm(PasswordChangeForm):
         max_length=255, widget=forms.PasswordInput(attrs={'class': 'form-control', 'type': 'password'}))
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ('old_password', 'new_password1', 'new_password2')
 
 
@@ -66,5 +66,5 @@ class AccountEditForm(UserChangeForm):
         attrs={'class': 'form-control'}))
 
     class Meta:
-        model = User
+        model = CustomUser
         fields = ('first_name', 'last_name', 'username', 'email')

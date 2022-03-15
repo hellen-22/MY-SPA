@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .forms import *
+from .models import *
 
 # Register your models here.
 class CustomUserAdmin(UserAdmin):
@@ -14,7 +15,7 @@ class CustomUserAdmin(UserAdmin):
     add_form = CustomUserForm
     change_form = PasswordChangingForm
     form = AccountEditForm
-    model = User
+    model = CustomUser
     add_fieldsets = ((None, {'fields': 
     ('username', 'password', 'confirm_password')}),
     ('Personal info', {'fields': ('first_name','last_name', 'email','date_joined')}),
@@ -22,4 +23,4 @@ class CustomUserAdmin(UserAdmin):
 
 
 
-admin.site.register(User)
+admin.site.register(CustomUser)
