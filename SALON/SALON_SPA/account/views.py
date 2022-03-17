@@ -56,6 +56,8 @@ def signup(request):
                     [email]
                 )
                 email_message.send()
+                message = 'Check your email to verify your account'
+                return HttpResponse(message, content_type='text/plain')
         else:
             messages.info(request, 'Password Does not match')
             return redirect('signup')
