@@ -1,12 +1,17 @@
-from django.utils.http import urlsafe_base64_encode
+from django.conf import settings
+from django.core.mail import EmailMessage
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from .models import CustomUser
 from django.contrib import messages
 from django.contrib.auth.models import auth
+from django.views.generic import View
+from .utils import generate_token
+from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.forms import PasswordResetForm
 from django.db.models.query_utils import Q
-from django.utils.encoding import force_bytes
+from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
@@ -33,8 +38,24 @@ def signup(request):
                 user = CustomUser.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
                 user.save()
 
-                return redirect('login')
+                current_site = get_current_site(request)
+                email_subject = 'Activate Your Account'
+                message = render_to_string('registration/activate.html',
+                {
+                    'user' : user,
+                    'domain' : current_site.domain,
+                    'uid' : urlsafe_base64_encode(force_bytes(CustomUser.pk)),
+                    'token' : generate_token.make_token(user)
+                }
+                )
 
+                email_message = EmailMessage(
+                    email_subject,
+                    message,
+                    settings.EMAIL_HOST_USER,
+                    [email]
+                )
+                email_message.send()
         else:
             messages.info(request, 'Password Does not match')
             return redirect('signup')
@@ -71,7 +92,25 @@ def logout(request):
 def home(request):
     return render(request, 'home.html')
 
+class AccountActivate(View):
+    def get(self, request, uid64, token):
+        try:
+            uid = force_str(urlsafe_base64_decode(uid64))
+            user = CustomUser.objects.get(pk=uid)
+        except Exception as identifier:
+            user = None
+
+        if user is not None and generate_token.chech_token(user, token):
+            user.is_active = True
+            user.save()
+            messages.add_message(request, messages.SUCCESS, 'Account Activation Successful')
+            return redirect('login')
+        else:
+            return render(request, 'registration/activate_failed.html', status=401)
+
+
 def password_reset_request(request):
+    """
     if request.method == 'POST':
         password_reset_form = PasswordResetForm(request.POST)
         if password_reset_form.is_valid():
@@ -99,4 +138,6 @@ def password_reset_request(request):
                     return redirect('/password_reset/done')
 
     password_reset_form = PasswordResetForm()
+    """
     return render(request=request, template_name='passwords/password_reset_email')
+    
