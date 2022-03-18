@@ -36,6 +36,7 @@ def signup(request):
 
             else:
                 user = CustomUser.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
+                user.is_active = False
                 user.save()
 
                 current_site = get_current_site(request)
@@ -94,22 +95,22 @@ def logout(request):
 def home(request):
     return render(request, 'home.html')
 
-class AccountActivate(View):
-    def get(self, request, uid64, token):
+class ActivateAccount(View):
+    def get(self, request, uidb64, token, *args, **kwargs):
         try:
-            uid = force_str(urlsafe_base64_decode(uid64))
+            uid = force_str(urlsafe_base64_decode(uidb64))
             user = CustomUser.objects.get(pk=uid)
-        except Exception as identifier:
+        except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
             user = None
 
-        if user is not None and generate_token.chech_token(user, token):
+        if user is not None and generate_token.check_token(user, token):
             user.is_active = True
             user.save()
-            messages.add_message(request, messages.SUCCESS, 'Account Activation Successful')
+            messages.success(request, ('Your account have been confirmed.'))
             return redirect('login')
         else:
-            return render(request, 'registration/activate_failed.html', status=401)
-
+            messages.warning(request, ('The confirmation link was invalid, possibly because it has already been used.'))
+            return redirect('signup')
 
 def password_reset_request(request):
     """
