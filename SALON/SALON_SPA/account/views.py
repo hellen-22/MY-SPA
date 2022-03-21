@@ -1,3 +1,4 @@
+from turtle import delay
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -46,10 +47,11 @@ def signup(request):
                     'user' : user,
                     'domain' : current_site.domain,
                     'uid' : urlsafe_base64_encode(force_bytes(CustomUser.pk)),
-                    'token' : generate_token.make_token(user)
+                    'token' : generate_token.make_token(user),
+                    
                 }
                 )
-
+            
                 email_message = EmailMessage(
                     email_subject,
                     message,
