@@ -10,6 +10,8 @@ router.register("customuser", CustomUserViewset, basename="customuser")
 router.register('group', GroupViewSet, basename='group')
 router.register('register', SignupViewSet, basename='register')
 router.register('login', LoginViewSet, basename='login')
+router.register('product', ProductViewset, basename='product')
+router.register('service', ServiceViewset, basename='service')
 
 
 urlpatterns = [

@@ -22,3 +22,13 @@ class LoginViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
     serializer_class = LoginSerializer
     permission_class = [permissions.IsAuthenticated]
+
+class ProductViewset(viewsets.ModelViewSet):
+    queryset = Product.objects.all()
+    serializer_class = ProductSerializer 
+    permission_class = [permissions.IsAuthenticated]
+
+class ServiceViewset(viewsets.ModelViewSet):
+    queryset = Service.objects.all()
+    serializer_class = ServiceSerializer 
+    permission_class = [permissions.IsAuthenticated]

@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from rest_framework import serializers
 from account.models import CustomUser
+from products.models import *
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -34,3 +35,14 @@ class LoginSerializer(serializers.ModelSerializer):
             return user
 
         raise serializers.ValidationError('Incorrect credentials Passed')
+
+
+class ProductSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Product
+        fields = '__all__'
+
+class ServiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Service
+        fields = '__all__'
