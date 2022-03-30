@@ -1,4 +1,5 @@
 from django.db import models
+from account.models import *
 
 class Product(models.Model):
     image = models.ImageField
@@ -18,3 +19,13 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
+
+class Cart(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    active = models.BooleanField(default=True)
+    order_date = models.DateField(null=True)
+    payment_method = models.CharField(max_length=50, null=True)
+    payment_id = models.CharField(max_length=100)
+
+    def __unicode__(self):
+        return "%s" % (self.user)
