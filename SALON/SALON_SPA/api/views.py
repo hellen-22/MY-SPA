@@ -1,6 +1,7 @@
 from rest_framework import serializers, viewsets, permissions
 from django.contrib.auth.models import Group
 from account.models import CustomUser
+from products.models import *
 from .serializers import *
 
 class CustomUserViewset(viewsets.ModelViewSet):
@@ -31,4 +32,9 @@ class ProductViewset(viewsets.ModelViewSet):
 class ServiceViewset(viewsets.ModelViewSet):
     queryset = Service.objects.all()
     serializer_class = ServiceSerializer 
+    permission_class = [permissions.IsAuthenticated]
+
+class CartViewSet(viewsets.ModelViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer
     permission_class = [permissions.IsAuthenticated]

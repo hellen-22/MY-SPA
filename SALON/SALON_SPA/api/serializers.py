@@ -1,3 +1,5 @@
+from dataclasses import fields
+from pyexpat import model
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from rest_framework import serializers
@@ -45,4 +47,9 @@ class ProductSerializer(serializers.ModelSerializer):
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
+        fields = '__all__'
+
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
         fields = '__all__'
