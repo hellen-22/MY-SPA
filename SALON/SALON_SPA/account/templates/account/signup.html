@@ -9,79 +9,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
     <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
     <link rel="stylesheet" href="{% static 'css/site.css' %}">
+    <link rel="stylesheet" href="{% static 'fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 </head>
 
 <body>
-    <div class="container">
-        <div class="header center">
-           SIGNUP | MY SALON SPA
-        </div>
-
-        <div class="main">
-            <form method="POST">
-                {% csrf_token %}
-                {% include 'include/messages.html' %}
-                <!--First Name-->
-                <div class="row">
-                    <div class="form-group col-md-8">
-                        <label for="first_name">First Name</label>
-                        <input id="first_name" type="text" name="first_name" class="form-control" placeholder="Enter First Name" required>
+    <div class="main">
+        <section class="signup">
+            <div class="container">
+                <div class="signup-content">
+                    <div class="signup-form">
+                        <h2 class="form-title">Sign up</h2>
+                        <form method="POST" class="register-form" id="register-form">
+                            {% csrf_token %}
+                            {% include 'include/messages.html' %}
+                            <div class="form-group">
+                                <label for="first_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="first_name" id="first_name" placeholder="Your First Name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="last_name"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="last_name" id="last_name" placeholder="Your Last Name"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="username"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                                <input type="text" name="username" id="username" placeholder="Your UserName"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="email"><i class="zmdi zmdi-email"></i></label>
+                                <input type="email" name="email" id="email" placeholder="Your Email"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="password"><i class="zmdi zmdi-lock"></i></label>
+                                <input type="password" name="password" id="password" placeholder="Password"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm_password"><i class="zmdi zmdi-lock-outline"></i></label>
+                                <input type="password" name="confirm_password" id="confirm_password" placeholder="Repeat your password"/>
+                            </div>
+                            <div class="form-group">
+                                <input type="checkbox" name="agree-term" id="agree-term" class="agree-term" />
+                                <label for="agree-term" class="label-agree-term"><span><span></span></span>I agree all statements in  <a href="#" class="term-service">Terms of service</a></label>
+                            </div>
+                            <div class="form-group form-button">
+                                <input type="submit" name="signup" id="signup" class="form-submit" value="Register"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="signup-image">
+                        <figure><img src="{% static 'images/signup-image.jpg' %}" alt="sing up image"></figure>
+                        <a href="{% url 'login'%}" class="signup-image-link">I am already member</a>
                     </div>
                 </div>
-
-                <!--Second Name-->
-                <div class="row">
-                    <div class="form-group col-md-8">
-                        <label for="last_name">Last Name</label>
-                        <input id="last_name" type="text" name="last_name" class="form-control" placeholder="Enter Last Name" required>
-                    </div>
-                </div>
-
-                <!--User Name-->
-                <div class="row">
-                    <div class="form-group col-md-8">
-                        <label for="username">UserName</label>
-                        <input id="username" type="text" name="username" class="form-control" placeholder="Enter UserName" required>
-                    </div>
-                </div>
-
-                <!--Email-->
-                <div class="row">
-                    <div class="form-group col-md-8">
-                        <label id="email-label" for="email">Email</label>
-                        <input id="email" type="email" name="email" class="form-control" placeholder="Enter email" required>
-                    </div>
-                </div>
-
-                <!--Password-->
-                <div class="row">
-                    <div class="form-group col-md-8">
-                        <label id="password" for="password">Password</label>
-                        <input id="password" type="password" name="password" class="form-control" placeholder="Enter Password" required>
-                    </div>
-                </div>
-
-                <!--Confirm Password-->
-                <div class="row">
-                    <div class="form-group col-md-8">
-                        <label for="confirm_password">Confirm Password</label>
-                        <input id="confirm_password" type="password" name="confirm_password" class="form-control" placeholder="Enter Confirm Password" required>
-                    </div>
-                </div>
-                <div class="wrap">
-                    <button class="btn btn-primary">SIGNUP</button>
-                </div>
-                <div class="row">
-                    <div class="col-md-4">
-                        <p>Already have an account?</p>
-                    </div>
-                    <div class="col-md-4">
-                        <a href="{% url 'login' %}">Login</a>
-                    </div>
-                </div>
-            </form>
-        </div>
+            </div>
+        </section>
     </div>
+    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+    <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
