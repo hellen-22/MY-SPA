@@ -563,7 +563,10 @@ label.valid {
     -ms-justify-content: center; }
 
   .form-button {
-    text-align: center; }
+    text-align: center; 
+    background-color: #F05DA3
+    !important;
+  }
 
   .signin-form {
     order: 1;
