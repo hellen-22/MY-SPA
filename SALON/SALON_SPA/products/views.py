@@ -1,14 +1,19 @@
-from pyexpat import model
 from django.shortcuts import redirect, render, get_object_or_404
+from matplotlib.style import context
 from .models import *
 from django.contrib.auth.decorators import login_required
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView
 from django.urls import reverse_lazy
 
+
 # Create your views here.
 
 def products(request):
-    return render(request, 'products.html')
+    products = Product.objects.all()
+    context = {
+        "products": products
+    }
+    return render(request, 'products.html', context)
 """
 def cart(request):
     return render(request, 'cart.html')
@@ -31,6 +36,13 @@ class CartItemCreateView(CreateView):
 class CartItemList(ListView):
     model = CartItem
     template_name = 'cart-item/cart_item.html'
+
+    def cart_item(request):
+        items = CartItem.objects.all()
+        context = {
+            'items':items
+        }
+        return render(request, context)
 
 class CartItemUpdateView(UpdateView):
     model = CartItem

@@ -3,7 +3,7 @@ from account.models import *
 from datetime import datetime
 
 class Product(models.Model):
-    image = models.ImageField
+    image = models.ImageField()
     name = models.CharField(max_length=20, verbose_name='name')
     description = models.TextField(max_length=200, verbose_name='description')
     category = models.CharField(max_length=50)
@@ -11,7 +11,7 @@ class Product(models.Model):
     rating = models.IntegerField()
 
     def ___str__(self):
-        return self.name
+        return str(self.category)
 
 class Service(models.Model):
     name = models.CharField(max_length=30)
@@ -32,7 +32,7 @@ class CartItem(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(default=1)
     price = models.IntegerField(default=1, verbose_name='price-cart')
-    remove = models.CharField(max_length=20)
+    
 
     def __str__(self):
-        return self.product + self.price
+        return self.product 

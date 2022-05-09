@@ -13,4 +13,5 @@ urlpatterns = [
     path('<pk>/update', CartItemUpdateView.as_view(), name='update_cartitem'),
     path('<pk>/delete', CartItemDeleteView.as_view(), name='delete_cartitem'),
 
+
 ]
