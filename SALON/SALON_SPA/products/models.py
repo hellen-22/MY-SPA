@@ -20,19 +20,3 @@ class Service(models.Model):
 
     def __str__(self):
         return self.name
-
-class Cart(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
-    activated_at = models.DateTimeField()
-
-    def __str__(self):
-        return self.user
-
-class CartItem(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity = models.IntegerField(default=1)
-    price = models.IntegerField(default=1, verbose_name='price-cart')
-    
-
-    def __str__(self):
-        return self.product 

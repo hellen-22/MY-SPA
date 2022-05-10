@@ -34,7 +34,3 @@ class ServiceViewset(viewsets.ModelViewSet):
     serializer_class = ServiceSerializer 
     permission_class = [permissions.IsAuthenticated]
 
-class CartViewSet(viewsets.ModelViewSet):
-    queryset = Cart.objects.all()
-    serializer_class = CartSerializer
-    permission_class = [permissions.IsAuthenticated]
