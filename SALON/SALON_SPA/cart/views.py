@@ -1,7 +1,6 @@
 from decimal import Decimal
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from matplotlib.style import context
 from .models import Cart, CartItem
 from products.models import Product
 

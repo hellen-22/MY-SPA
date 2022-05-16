@@ -136,7 +136,7 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'djangotestemail8@gmail.com'
 EMAIL_HOST_PASSWORD = 'Django22_'
-ACCOUNT_EMAIL_VERIFICATION = 'none'
+
 
 
 # Static files (CSS, JavaScript, Images)

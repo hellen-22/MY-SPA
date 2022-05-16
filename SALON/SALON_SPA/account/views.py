@@ -1,4 +1,3 @@
-from turtle import delay
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
@@ -8,7 +7,7 @@ from .models import CustomUser
 from django.contrib import messages
 from django.contrib.auth.models import auth
 from django.views.generic import View
-from .utils import generate_token
+from .utils import account_activation_token
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.forms import PasswordResetForm
 from django.db.models.query_utils import Q
@@ -47,7 +46,7 @@ def signup(request):
                     'user' : user,
                     'domain' : current_site.domain,
                     'uid' : urlsafe_base64_encode(force_bytes(CustomUser.pk)),
-                    'token' : generate_token.make_token(user),
+                    'token' : account_activation_token.make_token(user),
                     
                 }
                 )
@@ -97,6 +96,7 @@ def logout(request):
 def home(request):
     return render(request, 'home.html')
 
+
 class ActivateAccount(View):
     def get(self, request, uidb64, token, *args, **kwargs):
         try:
@@ -105,7 +105,7 @@ class ActivateAccount(View):
         except (TypeError, ValueError, OverflowError, CustomUser.DoesNotExist):
             user = None
 
-        if user is not None and generate_token.check_token(user, token):
+        if user is not None and account_activation_token.check_token(user, token):
             user.is_active = True
             user.save()
             messages.success(request, ('Your account have been confirmed.'))
@@ -115,6 +115,7 @@ class ActivateAccount(View):
             return redirect('signup')
 
 def password_reset_request(request):
+
     """
     if request.method == 'POST':
         password_reset_form = PasswordResetForm(request.POST)
