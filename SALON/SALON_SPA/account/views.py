@@ -116,6 +116,7 @@ class ActivateAccount(View):
 
 def password_reset_request(request):
 
+
     """
     if request.method == 'POST':
         password_reset_form = PasswordResetForm(request.POST)
@@ -145,5 +146,5 @@ def password_reset_request(request):
 
     password_reset_form = PasswordResetForm()
     """
-    return render(request=request, template_name='passwords/password_reset_email')
+    return render(request, 'passwords/password _reset_confirm.html')
     
