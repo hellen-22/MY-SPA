@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.core.mail import EmailMessage
+from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
@@ -15,6 +16,8 @@ from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
 from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
+from django.contrib.auth.views import PasswordResetView
+from django.contrib.messages.views import SuccessMessageMixin
 
 def signup(request):
     if request.method == 'POST':
@@ -147,4 +150,13 @@ def password_reset_request(request):
     password_reset_form = PasswordResetForm()
     """
     return render(request, 'passwords/password _reset_confirm.html')
-    
+
+class Password_Reset(SuccessMessageMixin, PasswordResetView):
+    template_name = "passwords/password_reset.html"
+    email_template_name = "passwords/password_reset_email.html"
+    subject_template_name = "passwords/password_reset_subject"
+    success_message = "We've emailed you instructions for setting your password, " \
+                      "if an account exists with the email you entered. You should receive them shortly." \
+                      " If you don't receive an email, " \
+                      "please make sure you've entered the address you registered with, and check your spam folder."
+
