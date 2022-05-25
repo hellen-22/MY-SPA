@@ -21,7 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('account.urls')),
     path('api/', include('api.urls')),
-    path('blog/', include('blog.urls')),
     path('product/', include('products.urls')),
     path('cart/', include('cart.urls')),
     path('password_reset/done/', auth_views.PasswordResetDoneView.as_view(template_name='passwords/password_reset_done.html'), name='password_reset_done'),
