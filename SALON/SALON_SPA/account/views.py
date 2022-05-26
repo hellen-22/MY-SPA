@@ -91,14 +91,6 @@ def login(request):
     else:
         print('nothing happened')
         return render(request, 'account/login.html')
-        
-def logout(request):
-    auth.logout(request)
-    return redirect('login')
-
-def home(request):
-    return render(request, 'home.html')
-
 
 class ActivateAccount(View):
     def get(self, request, uidb64, token, *args, **kwargs):
@@ -117,40 +109,6 @@ class ActivateAccount(View):
             messages.warning(request, ('The confirmation link was invalid, possibly because it has already been used.'))
             return redirect('signup')
 
-def password_reset_request(request):
-
-
-    """
-    if request.method == 'POST':
-        password_reset_form = PasswordResetForm(request.POST)
-        if password_reset_form.is_valid():
-            data = password_reset_form.cleaned_data['email']
-            associated_users = CustomUser.objects.filter(Q(email=data))
-            if associated_users.exists():
-                for user in associated_users:
-                    subject = "Password Reset Requested"
-                    email_template_name = "passwords/password_reset_email.txt"
-                    c = {
-                        "email" : user.email,
-                        'domain' : '127.0.0.1:8000',
-                        'site_name' : 'Website',
-                        "uid" : urlsafe_base64_encode(force_bytes(user.pk)),
-                        "user" : user,
-                        'token' : default_token_generator.make_token(user),
-                        'protocol' : 'http',
-                    }
-                    email = render_to_string(email_template_name, c)
-                    try:
-                        send_mail(subject, email, 'djangotestemail8@gmail.com', [user.email], fail_silently=False )
-                    except BadHeaderError:
-                        return HttpResponse('Invalid header found.')
-                    
-                    return redirect('/password_reset/done')
-
-    password_reset_form = PasswordResetForm()
-    """
-    return render(request, 'passwords/password _reset_confirm.html')
-
 class Password_Reset(SuccessMessageMixin, PasswordResetView):
     template_name = "passwords/password_reset.html"
     email_template_name = "passwords/password_reset_email.html"
@@ -159,4 +117,15 @@ class Password_Reset(SuccessMessageMixin, PasswordResetView):
                       "if an account exists with the email you entered. You should receive them shortly." \
                       " If you don't receive an email, " \
                       "please make sure you've entered the address you registered with, and check your spam folder."
+
+        
+def logout(request):
+    auth.logout(request)
+    return redirect('login')
+
+def home(request):
+    return render(request, 'home.html')
+
+def appointment(request):
+    return render(request, "appointment/appointment.html")
 

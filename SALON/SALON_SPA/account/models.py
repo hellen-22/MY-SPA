@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
+from products.models import Service
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, first_name, last_name, username, email, password=None):
@@ -69,3 +70,13 @@ class CustomUser(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+
+class Appointment(models.Model):
+    email = models.EmailField(max_length=30, unique=True)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE)
+    date = models.DateTimeField(auto_now=True)
+    time = models.TimeField()
+
+    def ___str___(self):
+        return self.service
