@@ -130,7 +130,7 @@ def home(request):
 def appointment(request):
     services = Service.objects.all()
     context = {
-        services : 'services'
+        'services' : services
     }
     return render(request, "appointment/appointment.html", context)
 
