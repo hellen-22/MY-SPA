@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from .models import CustomUser
+from .models import Appointment, CustomUser
 from django.contrib import messages
 from django.contrib.auth.models import auth
 from django.views.generic import View
@@ -18,6 +18,7 @@ from django.template.loader import render_to_string
 from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
+from products.models import *
 
 def signup(request):
     if request.method == 'POST':
@@ -127,5 +128,9 @@ def home(request):
     return render(request, 'home.html')
 
 def appointment(request):
-    return render(request, "appointment/appointment.html")
+    services = Service.objects.all()
+    context = {
+        services : 'services'
+    }
+    return render(request, "appointment/appointment.html", context)
 
