@@ -12,7 +12,7 @@ router.register('register', SignupViewSet, basename='register')
 router.register('login', LoginViewSet, basename='login')
 router.register('product', ProductViewset, basename='product')
 router.register('service', ServiceViewset, basename='service')
-
+router.register('book_appointment', BookAppointmentViewset, basename='book_appointment')
 
 
 urlpatterns = [

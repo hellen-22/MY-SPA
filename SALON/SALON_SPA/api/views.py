@@ -1,6 +1,6 @@
 from rest_framework import serializers, viewsets, permissions
 from django.contrib.auth.models import Group
-from account.models import CustomUser
+from account.models import CustomUser, Appointment
 from products.models import *
 from .serializers import *
 
@@ -34,3 +34,7 @@ class ServiceViewset(viewsets.ModelViewSet):
     serializer_class = ServiceSerializer 
     permission_class = [permissions.IsAuthenticated]
 
+class BookAppointmentViewset(viewsets.ModelViewSet):
+    queryset = Appointment.objects.all()
+    serializer_class = AppointmentSerializer
+    permission_classes = [permissions.IsAuthenticated]

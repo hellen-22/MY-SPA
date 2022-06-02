@@ -3,7 +3,7 @@ from pyexpat import model
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from rest_framework import serializers
-from account.models import CustomUser
+from account.models import CustomUser, Appointment
 from products.models import *
 
 class CustomUserSerializer(serializers.ModelSerializer):
@@ -49,3 +49,7 @@ class ServiceSerializer(serializers.ModelSerializer):
         model = Service
         fields = '__all__'
 
+class AppointmentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Appointment
+        fields = '__all__'
