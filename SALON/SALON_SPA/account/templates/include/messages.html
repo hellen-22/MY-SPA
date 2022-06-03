@@ -2,32 +2,35 @@
 <!DOCTYPE html>
 
 <html>
-
-<head>
+  <head>
     <title>SALON SPA | LOGIN</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
-    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/site.css' %}">
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
+    />
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/site.css' %}" />
     <style>
-        .message{
-            background-color: rgb(214, 189, 211);
-            text-align: center;
-            color: black;
-        }
+        
+      message {
+        background-color: rgb(214, 189, 211);
+        text-align: center;
+        color: black;
+      }
     </style>
+  </head>
 
-</head>
-
-<body>
-    {% if messages %}
-    <div class="messages row">
-        {% for message in messages %}
-        <div class="col-md-12 message">
-            <p {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</p>
-        </div>
-        {% endfor %}
+  <body>
+    {% for message in messages %}
+    <div class="container-fluid p-0">
+    <div class="alert {{ message.tags }} alert-dismissible" role="alert" >
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="True">&times;</span>
+        </button>
+        {{ message }}
     </div>
-    {% endif %}
-</body>
+    </div>
+{% endfor %}
+  </body>
 </html>
