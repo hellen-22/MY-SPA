@@ -10,4 +10,5 @@ urlpatterns = [
     path("password_reset/", Password_Reset.as_view(), name="password_reset"),
     path('activate/<uidb64>/<token>/', ActivateAccount.as_view(), name='activate'),
     path('appointment/', views.appointment, name='appointment'),
+    path('success/', views.success_book, name='success'),
 ]

@@ -1,3 +1,4 @@
+from unicodedata import name
 from django.conf import settings
 from django.core.mail import EmailMessage
 from django.urls import reverse_lazy
@@ -132,5 +133,20 @@ def appointment(request):
     context = {
         'services' : services
     }
-    return render(request, "appointment/appointment.html", context)
+    if request.method == "POST":
+        email = request.POST['email']
+        service = Service.objects.get(name = request.POST['service'])
+        date = request.POST['date']
+        time = request.POST['time']
 
+        appointment = Appointment.objects.create(email=email, service=service, date=date, time=time)
+        appointment.save()
+        messages.success(request, ('Your have sucessfully booked appointment. Please wait for a confirmation of availability'))
+        return redirect('success')
+
+
+    else:
+        return render(request, "appointment/appointment.html", context)
+
+def success_book(request):
+    return render(request, 'appointment/success.html')
