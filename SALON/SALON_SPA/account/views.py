@@ -20,6 +20,7 @@ from django.core.mail import send_mail, BadHeaderError
 from django.contrib.auth.views import PasswordResetView
 from django.contrib.messages.views import SuccessMessageMixin
 from products.models import *
+from django.contrib.auth.decorators import login_required
 
 def signup(request):
     if request.method == 'POST':
@@ -128,6 +129,7 @@ def logout(request):
 def home(request):
     return render(request, 'home.html')
 
+@login_required
 def appointment(request):
     services = Service.objects.all()
     context = {
@@ -147,6 +149,8 @@ def appointment(request):
 
     else:
         return render(request, "appointment/appointment.html", context)
+
+
 
 def success_book(request):
     return render(request, 'appointment/success.html')
