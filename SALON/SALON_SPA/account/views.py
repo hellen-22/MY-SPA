@@ -83,16 +83,13 @@ def login(request):
 
         if user is not None:
             auth.login(request, user)
-            print('User eists')
-            return redirect('home')
+            return redirect('home-approved')
 
         else:
             messages.info(request, 'Invalid credentials')
-            print('Invalid credentials')
             return redirect('login')
 
     else:
-        print('nothing happened')
         return render(request, 'account/login.html')
 
 class ActivateAccount(View):
@@ -124,10 +121,11 @@ class Password_Reset(SuccessMessageMixin, PasswordResetView):
         
 def logout(request):
     auth.logout(request)
-    return redirect('login')
+    return redirect('home')
 
-def home(request):
-    return render(request, 'home.html')
+@login_required
+def homeApproved(request):
+    return render(request, 'home/home-approved.html')
 
 @login_required
 def appointment(request):
@@ -150,6 +148,8 @@ def appointment(request):
     else:
         return render(request, "appointment/appointment.html", context)
 
+def home(request):
+    return render(request, 'home/home.html')
 
 
 def success_book(request):
