@@ -1,5 +1,3 @@
-from dataclasses import fields
-from pyexpat import model
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from rest_framework import serializers
@@ -9,7 +7,7 @@ from products.models import *
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
-        fields = '__all__'
+        fields = ['first_name', 'last_name', 'email', 'username']
 
 class GroupSerializer(serializers.ModelSerializer):
     class Meta:
@@ -42,14 +40,14 @@ class LoginSerializer(serializers.ModelSerializer):
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ['name', 'description', 'category', 'price', 'rating']
 
 class ServiceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Service
-        fields = '__all__'
+        fields = ['name', 'description', 'price']
 
 class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
-        fields = '__all__'
+        fields = ['email', 'service']

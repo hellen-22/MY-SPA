@@ -1,5 +1,5 @@
-from rest_framework import serializers, viewsets, permissions
 from django.contrib.auth.models import Group
+from rest_framework import serializers, viewsets, permissions
 from account.models import CustomUser, Appointment
 from products.models import *
 from .serializers import *
