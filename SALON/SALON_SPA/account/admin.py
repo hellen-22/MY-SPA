@@ -4,14 +4,15 @@ from .forms import *
 from .models import *
 
 # Register your models here.
+@admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
-    list_display = ('first_name', 'last_name', 'username', 'email', 'password')
-    search_fields = ('first_name', 'username')
-    readonly_fields = ('date_joined', 'last_login')
+    list_display = ['first_name', 'last_name', 'username', 'email', 'password']
+    search_fields = ['first_name', 'username']
+    readonly_fields = ['date_joined', 'last_login']
     filter_horizontal = ()
-    list_filter = ('last_login',)
+    list_filter = ['last_login']
     fieldsets = ()
-    ordering = ('first_name',)
+    ordering = ['first_name']
     add_form = CustomUserForm
     change_form = PasswordChangingForm
     form = AccountEditForm
@@ -23,5 +24,5 @@ class CustomUserAdmin(UserAdmin):
 
 
 
-admin.site.register(CustomUser, CustomUserAdmin)
+
 admin.site.register(Appointment)
