@@ -21,8 +21,5 @@ class OrderAdmin(admin.ModelAdmin):
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
     autocomplete_fields = ['order', 'product']
-    list_display = ['product', 'quantity', 'price', 'total']
+    list_display = ['product', 'quantity']
 
-    @admin.display(ordering='price')
-    def total(self, orderItem):
-       return orderItem.quantity * orderItem.price

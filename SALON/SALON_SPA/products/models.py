@@ -46,7 +46,6 @@ class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.PROTECT)
     product = models.ForeignKey(Product, on_delete=models.PROTECT)
     quantity = models.PositiveIntegerField()
-    price = models.DecimalField(max_digits=6, decimal_places=2)
 
     def __str__(self) -> str:
         return str(self.order)

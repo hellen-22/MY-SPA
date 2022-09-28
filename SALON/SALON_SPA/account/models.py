@@ -78,5 +78,5 @@ class Appointment(models.Model):
     date = models.DateTimeField(auto_now=True)
     time = models.TimeField()
 
-    def ___str___(self):
+    def __str__(self):
         return self.service
