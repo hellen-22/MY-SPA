@@ -39,6 +39,11 @@ class LoginSerializer(serializers.ModelSerializer):
 
         raise serializers.ValidationError('Incorrect credentials Passed')
 
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categories
+        fields = ['category']
+
 
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
@@ -60,7 +65,54 @@ class UserDetailsSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ['email', 'username']
 
+class CartItemSerializer(serializers.ModelSerializer):
+    product = ProductSerializer(read_only=True)
+    total_price = serializers.SerializerMethodField()
+
+    def get_total_price(self, cart_item: CartItem):
+        return cart_item.product.price * cart_item.quantity
+
+    class Meta:
+        model = CartItem
+        fields = ['id', 'product', 'quantity', 'total_price']
+
+
 class CartSerializer(serializers.ModelSerializer):
+    cart_items = CartItemSerializer(many=True, read_only=True)
+    total_cart_price = serializers.SerializerMethodField()
+
+    def get_total_cart_price(self, cart_item : CartItem):
+        return sum([item.quantity * item.product.price for item in cart_item.cart_items.all()])
+
     class Meta:
         model = Cart
-        fields = ['id', 'user']
+        fields = ['id', 'user', 'cart_items', 'total_cart_price']
+
+
+class AddCartItemSerializer(serializers.ModelSerializer):
+    product_id = serializers.IntegerField()
+
+    def validate_product_id(self, value):
+        if not Product.objects.filter(pk=value).exists():
+            raise serializers.ValidationError('No product with the given ID was found.')
+        return value
+
+    def save(self, **kwargs):
+        cart_id = self.context['cart_id']
+        product_id = self.validated_data['product_id']
+        quantity = self.validated_data['quantity']
+
+        try:
+            cart_item = CartItem.objects.get(cart_id=cart_id, product_id=product_id)
+            cart_item.quantity += quantity
+            cart_item.save()
+            self.instance = cart_item
+        
+        except CartItem.DoesNotExist:
+            self.instance = CartItem.objects.create(cart_id=cart_id, **self.validated_data)
+        
+        return self.instance
+
+    class Meta:
+        model = CartItem
+        fields = ['id', 'product_id', 'quantity']

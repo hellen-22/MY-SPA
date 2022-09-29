@@ -25,6 +25,10 @@ class LoginViewSet(viewsets.ModelViewSet):
     serializer_class = LoginSerializer
     permission_class = [permissions.IsAuthenticated]
 
+class CategoryViewSet(viewsets.ModelViewSet):
+    queryset = Categories.objects.all()
+    serializer_class = CategorySerializer
+
 class ProductViewset(viewsets.ModelViewSet):
     queryset = Product.objects.all()
     serializer_class = ProductSerializer 
@@ -43,3 +47,17 @@ class BookAppointmentViewset(viewsets.ModelViewSet):
 class CartViewSet(CreateModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = Cart.objects.all()
     serializer_class = CartSerializer
+
+class CartItemViewSet(viewsets.ModelViewSet):
+    http_method_names = ['get', 'post']
+
+    def get_serializer_class(self):
+        if self.request.method == 'POST':
+            return AddCartItemSerializer
+        return CartItemSerializer
+
+    def get_serializer_context(self):
+        return {'cart_id': self.kwargs['cart_pk']}
+
+    def get_queryset(self):
+        return CartItem.objects.filter(cart_id=self.kwargs['cart_pk'])
