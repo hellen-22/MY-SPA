@@ -1,5 +1,6 @@
 from django.contrib.auth.models import Group
 from rest_framework import serializers, viewsets, permissions
+from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
 from account.models import CustomUser, Appointment
 from products.models import *
 from .serializers import *
@@ -38,3 +39,7 @@ class BookAppointmentViewset(viewsets.ModelViewSet):
     queryset = Appointment.objects.all()
     serializer_class = AppointmentSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+class CartViewSet(CreateModelMixin, RetrieveModelMixin, viewsets.GenericViewSet):
+    queryset = Cart.objects.all()
+    serializer_class = CartSerializer

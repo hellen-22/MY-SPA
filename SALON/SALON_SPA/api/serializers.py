@@ -1,8 +1,11 @@
+from dataclasses import fields
+from pyexpat import model
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from rest_framework import serializers
 from account.models import CustomUser, Appointment
 from products.models import *
+from cart.models import *
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -51,3 +54,13 @@ class AppointmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Appointment
         fields = ['email', 'service']
+
+class UserDetailsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['email', 'username']
+
+class CartSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Cart
+        fields = ['id', 'user']
