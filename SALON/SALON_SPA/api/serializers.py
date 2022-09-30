@@ -1,12 +1,22 @@
-from dataclasses import fields
-from pyexpat import model
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from rest_framework import serializers
+from djoser.serializers import UserCreateSerializer, UserSerializer
 from account.models import Appointment
 from customuser.models import CustomUser
 from products.models import *
 from cart.models import *
+
+class CreateUserSerializer(UserCreateSerializer):
+    class Meta(UserCreateSerializer.Meta):
+        fields = ['id', 'username', 'first_name', 'last_name']
+
+
+
+
+
+
+
 
 class CustomUserSerializer(serializers.ModelSerializer):
     class Meta:
