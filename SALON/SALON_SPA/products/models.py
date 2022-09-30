@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 
 class Categories(models.Model):
     category = models.CharField(max_length=255)
@@ -35,7 +35,7 @@ class Order(models.Model):
     ]
     placed_at = models.DateTimeField(auto_now_add=True)
     payment_status = models.CharField(max_length=255, choices=PAYMENT_CHOICES)
-    customer = models.ForeignKey('account.CustomUser', on_delete=models.PROTECT)
+    customer = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.PROTECT)
 
 
     def __str__(self) -> str:

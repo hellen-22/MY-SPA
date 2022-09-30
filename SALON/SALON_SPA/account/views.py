@@ -5,7 +5,8 @@ from django.urls import reverse_lazy
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
-from .models import Appointment, CustomUser
+from .models import Appointment
+from customuser.models import CustomUser
 from django.contrib import messages
 from django.contrib.auth.models import auth
 from django.views.generic import View

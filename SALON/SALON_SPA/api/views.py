@@ -1,8 +1,9 @@
 from django.contrib.auth.models import Group
 from rest_framework import serializers, viewsets, permissions
 from rest_framework.mixins import CreateModelMixin, RetrieveModelMixin, DestroyModelMixin
-from account.models import CustomUser, Appointment
+from account.models import Appointment
 from products.models import *
+from customuser.models import *
 from .serializers import *
 
 class CustomUserViewset(viewsets.ModelViewSet):

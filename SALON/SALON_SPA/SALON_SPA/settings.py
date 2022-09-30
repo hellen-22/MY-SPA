@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'products',
     'cart',
     'dashboard',
+    'customuser',
 ]
 
 MIDDLEWARE = [
@@ -124,7 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/
 
-AUTH_USER_MODEL = 'account.CustomUser'
+AUTH_USER_MODEL = 'customuser.CustomUser'
 
 LANGUAGE_CODE = 'en-us'
 

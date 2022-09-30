@@ -3,7 +3,8 @@ from pyexpat import model
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import Group
 from rest_framework import serializers
-from account.models import CustomUser, Appointment
+from account.models import Appointment
+from customuser.models import CustomUser
 from products.models import *
 from cart.models import *
 
