@@ -138,10 +138,6 @@ USE_TZ = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
-}
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -171,4 +167,11 @@ DJOSER = {
     'SERIALIZERS' : {
         'user_create' : 'api.serializers.CreateUserSerializer'
     }
+}
+
+REST_FRAMEWORK = {
+    'COERCE_DECIMAL_TO_STRING': False,
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
 }
